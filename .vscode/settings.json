@@ -1,0 +1,15 @@
+{
+    "files.associations": {
+        "iostream": "cpp",
+        "random": "cpp",
+        "vector": "cpp",
+        "ratio": "cpp",
+        "array": "cpp",
+        "deque": "cpp",
+        "list": "cpp",
+        "queue": "cpp",
+        "span": "cpp",
+        "xstring": "cpp",
+        "xutility": "cpp"
+    }
+}
