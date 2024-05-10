@@ -94,7 +94,7 @@ int main()
         else  //否则就找一个最该替换的替换掉 
         {
             int j=upper_bound(d+1,d+len+1,a[i])-d;  //找到第一个大于它的d的下标 
-            d[j]=a[i]; 
+            d[j]=a[i]; //upeer_bound使用二分的方法查找的，所以复杂度是nlogn
         }
     }
     printf("%d\n",len);    
