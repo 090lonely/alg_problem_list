@@ -1,0 +1,5 @@
+this text is for my log .  
+5.10 
+1.vscode推送不行你就用命令行 git push origin main
+2.注意本地仓库，远程仓库的区别
+3.
