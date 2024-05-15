@@ -1,80 +1,87 @@
+//穷游这道题不是用dijkstra，而是用动态规划来的
 #include <iostream>
 #include <vector>
 #include <queue>
-#include <limits>
-
+#include <climits>
 using namespace std;
 
-const int INF = numeric_limits<int>::max();//这一行感觉很多地方都会用到
+const int INF = INT_MAX;
 
-struct Edge {
-    int to;
-    int weight;
-    Edge(int _to, int _weight) : to(_to), weight(_weight) {}
-};
+struct State {
+    int dist;
+    int u;
+    int cost;
 
-typedef vector<vector<Edge>> Graph;//图使用邻接表的方式实现
+    bool operator>(const State& other) const {
+        return dist > other.dist;
+    }
+};//用于存储当前的距离、顶点和费用，并重载>运算符以便在优先队列中按距离升序排列。
 
-vector<int> dijkstra(const Graph& graph, int source, int destination,int B[],int M) {//B is the cost,M is the money
-    int n = graph.size();
-    vector<int> dist(n, INF);
-    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
+void solve(int n, int E, int s, int t, int M, const vector<int>& B, const vector<vector<pair<int, int>>>& adj) {
+    vector<vector<int>> dp(n, vector<int>(M + 1, INF));
+    dp[s][0] = 0; // Start at s with 0 cost
 
-    dist[source] = 0;
-    pq.push(make_pair(0, source));
-    int now=0;//report the current cost;
+    priority_queue<State, vector<State>, greater<State>> pq;
+    pq.push({0, s, 0}); // Distance, vertex, cost
+
     while (!pq.empty()) {
-        int u = pq.top().second;
-        int d = pq.top().first;
+        State state = pq.top();
         pq.pop();
+        int dist = state.dist;
+        int u = state.u;
+        int cost = state.cost;
 
-        if (u == destination) {
-            break; // 如果已经到达目标顶点，就不需要再继续搜索了
-        }
+        if (dist > dp[u][cost]) continue; // Skip if not the best distance
 
-        if (d > dist[u]) {
-            continue; // 如果当前距离大于已知最短距离，就跳过
-        }
-
-        for (const auto& edge : graph[u]) {
-            int v = edge.to;
-            int weight = edge.weight;
-            if ((dist[u] + weight < dist[v])&&(now+B[v]<=M)) {
-                now+=B[v];
-                dist[v] = dist[u] + weight;//只有当满足条件也就是有钱而且最短路更新的时候才会将v节点加入队列
-                pq.push(make_pair(dist[v], v));
+        for (const auto& neighbor : adj[u]) {//遍历u的所有邻接点，当费用满足条件而且距离更短时会加入优先级队列
+            int v = neighbor.first;
+            int w = neighbor.second;
+            int new_cost = cost + B[v];
+            if (new_cost <= M && dist + w < dp[v][new_cost]) {
+                dp[v][new_cost] = dist + w;
+                pq.push({dist + w, v, new_cost});
             }
         }
     }
 
-    return dist;
+    int result = INF;
+    for (int i = 0; i <= M; ++i) {
+        result = min(result, dp[t][i]);
+    }
+
+    if (result == INF) {
+        cout << -1 << endl;
+    } else {
+        cout << result << endl;
+    }
 }
 
 int main() {
     int T;
     cin >> T;
-
     while (T--) {
-        int n, E, s, t,M;
-        cin >> n >> E >> s >> t>> M;
-        int B[505];
-        Graph graph(n);
-        for(int i=0;i<n;i++)cin>>B[i];
+        int n, E, s, t, M;
+        cin >> n >> E >> s >> t >> M;
+        s--; // 0-based index
+        t--; // 0-based index
+
+        vector<int> B(n);
+        for (int i = 0; i < n; ++i) {
+            cin >> B[i];
+        }
+        B[s] = 0; // No entry fee for the starting country
+
+        vector<vector<pair<int, int>>> adj(n);
         for (int i = 0; i < E; ++i) {
             int u, v, w;
             cin >> u >> v >> w;
-            graph[u - 1].push_back(Edge(v - 1, w));
-            graph[v - 1].push_back(Edge(u - 1, w)); // 无向图，需双向添加边
+            u--; // 0-based index
+            v--; // 0-based index
+            adj[u].emplace_back(v, w);
+            adj[v].emplace_back(u, w);
         }
 
-        vector<int> dist = dijkstra(graph, s - 1, t - 1,B,M);
-
-        if (dist[t - 1] == INF) {
-            cout << -1 << endl;
-        } else {
-            cout << dist[t - 1] << endl;
-        }
+        solve(n, E, s, t, M, B, adj);
     }
-
     return 0;
 }

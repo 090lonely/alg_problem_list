@@ -2,4 +2,6 @@ this text is for my log .
 5.10 
 1.vscode推送不行你就用命令行 git push origin main
 2.注意本地仓库，远程仓库的区别
-3.
+3.整体的使用步骤：首先保存更改进入暂存区，然后commit到本地仓库（需要message），最后才会push到远端仓库
+5.15
+1.完成穷游题目tour-graph，注意看注释
