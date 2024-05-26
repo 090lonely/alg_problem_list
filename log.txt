@@ -17,3 +17,5 @@ this text is for my log .
 git config --global https.proxy http://localhost:15236
  git config --global http.proxy http://localhost:15236 
  加上这两行就可以让git得到系统的代理，从而可以push上去
+ 5.26
+ 完成了一道题，1024最优二叉搜索树，但很显然我完成的不好，关的记忆化搜索是咋实现的？
