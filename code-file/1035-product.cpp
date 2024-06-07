@@ -1,54 +1,39 @@
-#include <bits/stdc++.h>
+//注意输入输出都有较大的值：
+#include<iostream>
+#include<algorithm>
+#include<cstring>
+#include<bits/stdc++.h>
 using namespace std;
+const int N = 1e5 + 10;
+long long int c[N], y[N];
 
-struct Month {
-    int cost; // 生产成本
-    int demand; // 需求量
-};
-
-bool compare(const Month &a, const Month &b) {
-    return a.cost < b.cost;
-}
-
-int main() {
-    int T;
-    cin >> T;
-    while (T--) {
-        int N;
-        cin >> N;
-        vector<Month> months(N);
-        for (int i = 0; i < N; ++i) cin >> months[i].cost;
-        for (int i = 0; i < N; ++i) cin >> months[i].demand;
-        
-        sort(months.begin(), months.end(), compare);
-
-        long long total_cost = 0;
-        int current_inventory = 0;
-        
-        for (int i = 0; i < N; ++i) {
-            int month_cost = months[i].cost;
-            int month_demand = months[i].demand;
-
-            // 计算这个月生产的数量
-            if (current_inventory >= month_demand) {
-                total_cost += month_cost * 0; // 这月不需要生产
-                total_cost += month_demand; // 使用库存
-                current_inventory -= month_demand;
-            } else {
-                int produce = month_demand - current_inventory;
-                total_cost += month_cost * produce; // 生产
-                total_cost += current_inventory; // 使用库存
-                current_inventory = 0; // 库存用完
-            }
-
-            // 计算剩余库存的存储成本
-            current_inventory += month_demand;
+int main()
+{
+    int m;
+    cin >> m;
+    while (m--)
+    {
+        int n;//非常精妙的一个算法。
+        cin >> n;
+        memset(c, 0, sizeof c);
+        memset(y, 0, sizeof y);
+        for (int i = 0; i < n; i++)
+        {
+            cin >> c[i];
         }
-
-        cout << total_cost << endl;
+        for (int i = 0; i < n; i++)
+        {
+            cin >> y[i];
+        }
+        long long int ans = 0;//注意long long
+        long long int tem = 1e9;//存储附加比较成本
+        for (int i = 0; i < n; i++)
+        {
+            tem = min(tem, c[i]);//这里会进行计算，也就是上个月生产成本+1之后如果更小，那么就选择用上个月去进行生产
+            ans+= tem * y[i];//ans加上代价
+            tem++;//成本+1，因为这个月到下个月会加上存储成本去和下个月的生产成本去比较。
+        }
+        cout << ans << endl;
     }
     return 0;
 }
-
-
-
