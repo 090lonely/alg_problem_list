@@ -43,31 +43,35 @@
 #1.无人机规划问题。
 #先画一个图，再画一个总能耗最低的图
 #首先计算P（v）/v的最小功耗也就是自由飞行的时候
+#2024.6.7添加注释
+# import numpy as np
+# import matplotlib.pyplot as plt
+
+# # 定义函数
+# def polynomial(v):
+#     return 0.07 * v**2 + 0.0391 * v - 13.196 + 390.95 / v
+
+# # 生成一组 x 值
+# v_values = np.linspace(1, 100, 400)  # 从1到100生成400个点
+
+# # 计算对应的 y 值
+# y_values = polynomial(v_values)
+
+# # 找到最低点的坐标
+# min_index = np.argmin(y_values)
+# min_v = v_values[min_index]
+# min_y = y_values[min_index]
+
+# # 绘制图像
+# plt.plot(v_values, y_values)
+# plt.scatter(min_v, min_y, color='red', label=f'Minimum Point: ({min_v:.2f}, {min_y:.2f})')
+# plt.title('Polynomial Graph: 0.07*v^2 + 0.0391*v - 13.196 + 390.95/v')
+# plt.xlabel('v')
+# plt.ylabel('Polynomial Value')
+# plt.grid(True)
+# plt.legend()
+# plt.show()
 import numpy as np
-import matplotlib.pyplot as plt
-
-# 定义函数
-def polynomial(v):
-    return 0.07 * v**2 + 0.0391 * v - 13.196 + 390.95 / v
-
-# 生成一组 x 值
-v_values = np.linspace(1, 100, 400)  # 从1到100生成400个点
-
-# 计算对应的 y 值
-y_values = polynomial(v_values)
-
-# 找到最低点的坐标
-min_index = np.argmin(y_values)
-min_v = v_values[min_index]
-min_y = y_values[min_index]
-
-# 绘制图像
-plt.plot(v_values, y_values)
-plt.scatter(min_v, min_y, color='red', label=f'Minimum Point: ({min_v:.2f}, {min_y:.2f})')
-plt.title('Polynomial Graph: 0.07*v^2 + 0.0391*v - 13.196 + 390.95/v')
-plt.xlabel('v')
-plt.ylabel('Polynomial Value')
-plt.grid(True)
-plt.legend()
-plt.show()
-
+def square(x):
+    return x*x;
+square(5)
