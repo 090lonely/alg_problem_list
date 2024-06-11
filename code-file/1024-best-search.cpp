@@ -69,17 +69,18 @@
 using namespace std;
 double f[510][510];
 double a[510], b[510], s1[510], s2[510];
-double solve(int p, int q) {
+double search(int p, int q) {
 	if (p > q)return f[p][q] = 0;
 	if (p == q)return f[p][q] = a[p] + b[p] + b[p + 1];//如果pq相等，说明只需要都将概率都加起来
 	double ans = 1000000, ss;
 	for (int i = p; i <= q; i++) {
-		if (f[p][i - 1] < 0)f[p][i - 1] = solve(p, i - 1);//记忆化搜索
-		if (f[i + 1][q] < 0)f[i + 1][q] = solve(i + 1, q);
+		if (f[p][i - 1] < 0)f[p][i - 1] = search(p, i - 1);//记忆化搜索
+		if (f[i + 1][q] < 0)f[i + 1][q] = search(i + 1, q);
 		ss = s1[q] - s1[p - 1] + s2[q + 1] - s2[p - 1] + f[p][i - 1] + f[i + 1][q];
 		if (ans > ss)ans = ss;
 	}
-	return f[p][q] = ans;
+	f[p][q] = ans;
+	return ans;
 }
 
 int main() {
@@ -103,7 +104,7 @@ int main() {
 		}
 		s2[n + 1] = s2[n] + b[n + 1];//最后一个单独算
 
-		cout << fixed << setprecision(6) << solve(1, n) << endl;
+		cout << fixed << setprecision(6) << search(1, n) << endl;
 
 	}
 	return 0;
