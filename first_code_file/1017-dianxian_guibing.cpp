@@ -1,5 +1,5 @@
-#include<iostream>
-//#include<bits/stdc++.h>
+#include<iostream>//已经重新
+#include<bits/stdc++.h>
 using namespace std;
 const int N=100010;
 int q[N],t[N],n;
@@ -17,7 +17,7 @@ void merge_sort(int l,int r){
         else
         {
             t[k++]=q[j++];
-            res+=mid-i+1;//  “治”
+            res+=mid-i+1;//  “治”//其实这一步就是在统计逆序对的数量
         }    
     }
     while(i<=mid) t[k++]=q[i++];//收尾：假如左端或者右端先填完了，得把另一端的数都加上。
