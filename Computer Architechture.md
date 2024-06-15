@@ -9,6 +9,7 @@
 • 类型：定长指令字、变长指令字//(R-R型为定长结构，其余常为变长结构)
 REG的编址单位：与OPD长度对应（=ALU运算位数）
 ![alt text](image.png)
+![alt text](image-2.png)先写再读即为raw 
 ## 流水线
 ## 第四章 指令级并行ILP
 ### 动态调度算法
@@ -50,4 +51,5 @@ cache一致性协议
 
 
 4.计算题
+![alt text](image-3.png)
 
