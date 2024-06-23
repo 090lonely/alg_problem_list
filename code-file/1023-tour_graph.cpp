@@ -1,8 +1,5 @@
 //穷游这道题不是用dijkstra，而是用动态规划来的
-#include <iostream>
-#include <vector>
-#include <queue>
-#include <climits>
+#include<bits/stdc++.h>
 using namespace std;
 
 const int INF = INT_MAX;
@@ -77,7 +74,7 @@ int main() {
             cin >> u >> v >> w;
             u--; // 0-based index
             v--; // 0-based index
-            adj[u].emplace_back(v, w);
+            adj[u].emplace_back(v, w);//这些都是最基本的对于vector的操作，但是老出问题/
             adj[v].emplace_back(u, w);
         }
 

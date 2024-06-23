@@ -5,7 +5,7 @@
 //  Created by 胡昱 on 2021/12/20.
 //
 
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
 
 int main(int argc, const char * argv[]) {

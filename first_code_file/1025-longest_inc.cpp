@@ -66,9 +66,7 @@
 //   // return 0;
 // }
 
-#include<cstdio>
-#include<algorithm>
-#include<iostream>
+#include<bits/stdc++.h>
 using namespace std;
  
 int a[40005];

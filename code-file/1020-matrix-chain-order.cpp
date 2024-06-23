@@ -51,7 +51,7 @@
 //     return 0;
 // }
 #pragma GCC optimize(3,"Ofast","inline")//性能优化
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
 long long T, n, x[510], y[510];//x是行数，y是列数
 long long f[510][510] = { 0 };

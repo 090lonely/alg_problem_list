@@ -31,7 +31,7 @@ void addEdge(int from, int to, int cap, int cost) {
     G[to].push_back(k - 1);
 }
 
-bool SPFA(int s, int t, int& flow, int& cost) {
+bool SPFA(int s, int t, int& flow, int& cost) {//the real code of the algorithm,this isthe msst important.
     memset(in_queue, 0, sizeof(in_queue));
     memset(vis, 0, sizeof(vis));
     for (int i = 0; i < MAXN; i++) d[i] = INF;

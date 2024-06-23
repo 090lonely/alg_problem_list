@@ -6,7 +6,7 @@
 //  Created by 胡昱 on 2021/12/31.
 //
 
-#include <iostream>
+#include <bits/stdc++.h>
 #include <algorithm>
 using namespace std;
 

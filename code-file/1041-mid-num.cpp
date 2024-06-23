@@ -1,4 +1,4 @@
-#include <iostream>
+#include <bits/stdc++.h>
 #include <vector>
 #include <algorithm>
 
@@ -39,7 +39,7 @@ double findMedianSortedArrays(const vector<int>& nums1, const vector<int>& nums2
         }
     }
 
-    return 0.0;
+    return 0.0;//the return value must obey the rule.
 }
 
 int main() {

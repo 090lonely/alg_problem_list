@@ -1,8 +1,7 @@
 //c++ have the standard algorithm ,that is priority_queue;
 //first ,i will try the standard;
-#include <iostream>
-#include <vector>
-#include <algorithm>
+#include <bits/stdc++.h>
+
 
 using namespace std;
 
